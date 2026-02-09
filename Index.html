@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucy 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+      url("https://images.unsplash.com/photo-1518791841217-8f162f1e1131");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(6px);
+    padding: 25px;
+    border-radius: 25px;
+    max-width: 95%;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .photos {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+
+  .photos img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid white;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  button {
+    padding: 14px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .yes {
+    background: #ff4d6d;
+    color: white;
+  }
+
+  .no {
+    background: #555;
+    color: white;
+    position: absolute;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🐱 Lucy 💖</h1>
+  <p>
+    Even this cat is begging… 🥺<br>
+    almost as much as I am 💕<br><br>
+    Will you be my Valentine?
+  </p>
+
+  <!-- PHOTO SECTION -->
+  <div class="photos">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330">
+  </div>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClicked()">Yes 💕</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">No 🙃</button>
+  </div>
+</div>
+
+<audio id="song">
+  <!-- Upload your song to the repo and name it ordinary.mp3 -->
+  <source src="ordinary.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+
+  function moveNo() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  function yesClicked() {
+    document.getElementById("song").play();
+
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        font-family:'Courier New', monospace;
+        background:
+          linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+          url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131');
+        background-size:cover;
+        background-position:center;
+        color:white;
+        padding:20px;
+      ">
+        <div style="
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(6px);
+          padding:25px;
+          border-radius:20px;
+          max-width:95%;
+          box-shadow:0 15px 30px rgba(0,0,0,0.3);
+        ">
+          <h2>💌 A letter for you, Lucy</h2>
+          <p id="letter" style="font-size:1.05rem; line-height:1.6;"></p>
+          <p style="margin-top:20px;">❤️</p>
+        </div>
+      </div>
+    `;
+
+    const text = `
+Lucy,
+
+I don’t know when it happened,
+but somewhere between the laughs,
+the late conversations,
+and the quiet moments…
+
+you became my favorite place to be.
+
+You make ordinary days feel special,
+and special days unforgettable.
+If love had a sound,
+it would be your laugh.
+If comfort had a face,
+it would be yours.
+
+So today, and every day after,
+I choose you.
+
+Happy Valentine’s Day 💖
+    `;
+
+    let i = 0;
+    const speed = 40;
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("letter").innerHTML +=
+          text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    typeWriter();
+  }
+</script>
+
+</body>
+</html>
